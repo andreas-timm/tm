@@ -21,6 +21,8 @@ ENVIRONMENT:
 
 ## Full code
 ```bash
+# @sha256sum 0xfbd4e9b3b30a1970d5769e9f269ca580d271901fb6da0dc9f00b72b51188fb9b
+# @eip191signature 0x8d6ff847108b36c453b6fb622dec0b95926fc2808d02627590b642ad97c59e6424eb7ba65d95efbe2a24ca081030537e632e0be54fed767b290d20e506ddfd2a1b
 MESSAGE=$1
 
 if [ "$MESSAGE" = "-h" ]; then
