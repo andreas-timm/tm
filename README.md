@@ -21,8 +21,8 @@ ENVIRONMENT:
 
 ## Full code
 ```bash
-# @sha256sum 0x271edb022dd9d4eb1e79daf48aeb4db6f7c003db0c6621e6d500181d50e72036
-# @eip191signature 0x9e5ceee582a18e39c3b80f9fc986d0967d2d280eaef020ff5eefccb610db9aed327cd33e849e683b9b72b8681066deadb2f1fbce6acb5280f4386bafa243ca4a1b
+# @sha256sum 0xa2dddad7cd05c6e04582fa77e54821cfe7fc342afd01bf2bad4aa24330e7561e
+# @eip191signature 0x0ae21e8555f7aa9021bdf5fc8a8445e4f26bc139def7f6099832fa887d679c6e136e9818c7abbae232f89028a23774bcb71a3719b57a07023a6b91c31e51edc71c
 MESSAGE=$1
 
 if [ "$MESSAGE" = "-h" ]; then
@@ -34,11 +34,11 @@ if [ "$MESSAGE" = "-h" ]; then
     exit 0
 fi
 
-SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-test -f "$SCRIPT_DIR/.env" && source "$SCRIPT_DIR/.env"
-test -f "$HOME/.config/tm/env" && source "$HOME/.config/tm/env"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+test -f "$SCRIPT_DIR/.env" && . "$SCRIPT_DIR/.env"
+test -f "$HOME/.config/tm/env" && . "$HOME/.config/tm/env"
 
-function checkEnv() { name=$1; [ -z "${!name}" ] && name=$(pass show "tm/$name"); echo -n "${!name}"; }
+checkEnv() { name=$1; eval value='$'"$name"; [ -z "$value" ] && name=$(pass show "tm/$name"); printf %s "$value"; }
 
 MESSAGE_PREFIX="$(checkEnv MESSAGE_PREFIX)"
 CHAT_ID="$(checkEnv CHAT_ID)"
