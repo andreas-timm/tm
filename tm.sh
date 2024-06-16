@@ -4,7 +4,17 @@ SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 test -f "$SCRIPT_DIR/.env" && source "$SCRIPT_DIR/.env"
 
 MESSAGE=$1
-urlPrefix="https://api.telegram.org/bot${T}/"
+
+if [ "$MESSAGE" = "-h" ]; then
+    echo "Usage: $(basename "$0") <MESSAGE>|->"
+    echo "ENVIRONMENT:"
+    echo "  MESSAGE_PREFIX"
+    echo "  CHAT_ID"
+    echo "  ID_AUTH"
+    exit 0
+fi
+
+urlPrefix="https://api.telegram.org/bot${ID_AUTH}/"
 maxMessageLength=$((4096 - ${#MESSAGE_PREFIX}))
 
 (
