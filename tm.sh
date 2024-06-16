@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
-source "$SCRIPT_DIR/.env"
+test -f "$SCRIPT_DIR/.env" && source "$SCRIPT_DIR/.env"
 
 MESSAGE=$1
 urlPrefix="https://api.telegram.org/bot${T}/"
