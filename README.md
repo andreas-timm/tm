@@ -12,7 +12,7 @@ Usage: tm <MESSAGE>|->
 ENVIRONMENT:
   MESSAGE_PREFIX
   CHAT_ID
-  ID_AUTH
+  API_ID
 ```
 
 ## Usage
@@ -21,8 +21,8 @@ ENVIRONMENT:
 
 ## Full code
 ```bash
-# @sha256sum 0xfbd4e9b3b30a1970d5769e9f269ca580d271901fb6da0dc9f00b72b51188fb9b
-# @eip191signature 0x8d6ff847108b36c453b6fb622dec0b95926fc2808d02627590b642ad97c59e6424eb7ba65d95efbe2a24ca081030537e632e0be54fed767b290d20e506ddfd2a1b
+# @sha256sum 0x271edb022dd9d4eb1e79daf48aeb4db6f7c003db0c6621e6d500181d50e72036
+# @eip191signature 0x9e5ceee582a18e39c3b80f9fc986d0967d2d280eaef020ff5eefccb610db9aed327cd33e849e683b9b72b8681066deadb2f1fbce6acb5280f4386bafa243ca4a1b
 MESSAGE=$1
 
 if [ "$MESSAGE" = "-h" ]; then
@@ -30,7 +30,7 @@ if [ "$MESSAGE" = "-h" ]; then
     echo "ENVIRONMENT:"
     echo "  MESSAGE_PREFIX"
     echo "  CHAT_ID"
-    echo "  ID_AUTH"
+    echo "  API_ID"
     exit 0
 fi
 
@@ -42,9 +42,9 @@ function checkEnv() { name=$1; [ -z "${!name}" ] && name=$(pass show "tm/$name")
 
 MESSAGE_PREFIX="$(checkEnv MESSAGE_PREFIX)"
 CHAT_ID="$(checkEnv CHAT_ID)"
-ID_AUTH="$(checkEnv ID_AUTH)"
+API_ID="$(checkEnv API_ID)"
 
-urlPrefix="https://api.telegram.org/bot${ID_AUTH}/"
+urlPrefix="https://api.telegram.org/bot${API_ID}/"
 maxMessageLength=$((4096 - ${#MESSAGE_PREFIX}))
 
 (

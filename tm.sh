@@ -5,8 +5,8 @@
 # Author: Andreas Timm
 # Repository: https://github.com/andreas-timm/tm
 # Version: 0.5.0
-# @sha256sum 0x46460d3d235dab6cd2aca7f65d3078cd103b7020a09ee81c12a4510b40cf0919
-# @eip191signature 0x0101de4a2908ce689e3242711a5addbd44f1e34b0666459dee58f46f6ea8853b19f772d924e32fe162c45f1641c9d8c428ea9c9149a2b1f113a9eba4047190341b
+# @sha256sum 0xd8bee9c9bbce10af78d28321a02417454808d3e36549aecd7b0bc49f6dcbeae0
+# @eip191signature 0xbcee1fd9890f644bbd7e44d7fb2e714ee06f164416ddf2fd476a9a9bcb1b70cc0e98d8a5fb61d60435869938f6ccaca52b8d33145552d657cb4b8c40f23694911c
 
 MESSAGE=$1
 
@@ -15,7 +15,7 @@ if [ "$MESSAGE" = "-h" ]; then
     echo "ENVIRONMENT:"
     echo "  MESSAGE_PREFIX"
     echo "  CHAT_ID"
-    echo "  ID_AUTH"
+    echo "  API_ID"
     exit 0
 fi
 
@@ -27,9 +27,9 @@ function checkEnv() { name=$1; [ -z "${!name}" ] && name=$(pass show "tm/$name")
 
 MESSAGE_PREFIX="$(checkEnv MESSAGE_PREFIX)"
 CHAT_ID="$(checkEnv CHAT_ID)"
-ID_AUTH="$(checkEnv ID_AUTH)"
+API_ID="$(checkEnv API_ID)"
 
-urlPrefix="https://api.telegram.org/bot${ID_AUTH}/"
+urlPrefix="https://api.telegram.org/bot${API_ID}/"
 maxMessageLength=$((4096 - ${#MESSAGE_PREFIX}))
 
 (
